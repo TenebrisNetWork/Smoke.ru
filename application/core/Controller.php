@@ -5,6 +5,7 @@ class Controller {
 
     protected $model;
     protected $view;
+    protected $pathToTemplate = ROOT.'views/template/baseTemplate.php';
 
     function __construct()
     {
@@ -12,10 +13,11 @@ class Controller {
         $this->model = new Model();
     }
 
-    public function render($pathToView)
+    //Принимает на вход название файла с видом (без .php) и данные, строит маршруты и вызывает метод generate у вида
+    public function render($pathToView, $data = null)
     {
-        $className = stristr(get_class($this), 'Controller');
-        $pathToView = ROOT . 'views/' . $className . '/' . $pathToView;
-        return include_once($pathToView);
+        $className = stristr(get_class($this), 'Controller', true);
+        $pathToView = ROOT . 'views/' . $className . '/' . $pathToView . '.php';
+        $this->view->generate($pathToView, $this->pathToTemplate, $data);
     }
 }

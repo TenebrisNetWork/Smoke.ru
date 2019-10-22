@@ -1,6 +1,7 @@
 <?php
-class siteController {
+require_once ROOT.'core/Controller.php';
+class siteController extends  Controller {
     public function  actionIndex(){
-        echo 'site';
+        return $this->render('index');
     }
 }
