@@ -5,7 +5,7 @@ class Controller {
 
     protected $model;
     protected $view;
-    protected $pathToTemplate = ROOT.'views/template/baseTemplate.php';
+    protected $nameTemplate = 'baseTemplate';
 
     function __construct()
     {
@@ -18,6 +18,7 @@ class Controller {
     {
         $className = stristr(get_class($this), 'Controller', true);
         $pathToView = ROOT . 'views/' . $className . '/' . $pathToView . '.php';
-        $this->view->generate($pathToView, $this->pathToTemplate, $data);
+        $pathToTemplate = ROOT.'views/template/'.$this->nameTemplate.'.php';
+        $this->view->generate($pathToView, $pathToTemplate, $data);
     }
 }
